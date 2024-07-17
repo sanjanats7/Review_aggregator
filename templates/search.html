@@ -1,24 +1,54 @@
-<!-- search/templates/search/search.html -->
-
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>TMDB Search</title>
-</head>
-<body>
-    <h1>Search Movies</h1>
-    <form method="get" action="">
-        <input type="text" name="q" placeholder="Search for a movie...">
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 10px 0;
+        padding: 10px;
+        background-color: #f9f9f9;
+      }
+      .card h3 {
+        margin-top: 0;
+      }
+      .card p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Search Movies</h1>
+      <form method="get" action="">
+        <input type="text" name="q" placeholder="Search for a movie..." />
         <button type="submit">Search</button>
-    </form>
+      </form>
 
-    {% if results %}
-        <h2>Results</h2>
-        <ul>
-            {% for movie in results %}
-                <li>{{ movie.title }} ({{ movie.release_date }})</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-</body>
+      {% if results %}
+      <h2>Results</h2>
+      {% for movie in results %}
+      <div class="card">
+        <div class="card-image">
+          <img src="{{ movie.poster_url }}" alt="{{ movie.title }} Poster" />
+        </div>
+        <div class="card-content">
+          <h3>{{ movie.title }} ({{ movie.release_date }})</h3>
+          <p><strong>Overview:</strong> {{ movie.overview }}</p>
+          <p><strong>Popularity:</strong> {{ movie.popularity }}</p>
+          <!-- Add more details as needed -->
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </body>
 </html>
