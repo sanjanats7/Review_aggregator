@@ -8,21 +8,28 @@
         margin: 20px;
       }
       .container {
-        max-width: 800px;
+        max-width: 1200px; /* Adjust max-width as per your design */
         margin: 0 auto;
+        display: grid;
+        gap: 20px;
+        grid-template-columns: repeat(
+          auto-fit,
+          minmax(300px, 1fr)
+        ); /* Three columns, responsive */
       }
       .card {
         border: 1px solid #ccc;
         border-radius: 5px;
-        margin: 10px 0;
         padding: 10px;
         background-color: #f9f9f9;
       }
-      .card h3 {
-        margin-top: 0;
+      .card img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px 5px 0 0; /* Rounded corners for the top of the image */
       }
-      .card p {
-        margin: 5px 0;
+      .card-content {
+        padding: 10px;
       }
     </style>
   </head>
@@ -34,13 +41,11 @@
         <button type="submit">Search</button>
       </form>
 
-      {% if results %}
-      <h2>Results</h2>
-      {% for movie in results %}
+      {% if message %}
+      <p>{{ message }}</p>
+      {% endif %} {% if results %} {% for movie in results %}
       <div class="card">
-        <div class="card-image">
-          <img src="{{ movie.poster_url }}" alt="{{ movie.title }} Poster" />
-        </div>
+        <img src="{{ movie.poster_url }}" alt="{{ movie.title }} Poster" />
         <div class="card-content">
           <h3>{{ movie.title }} ({{ movie.release_date }})</h3>
           <p><strong>Overview:</strong> {{ movie.overview }}</p>
