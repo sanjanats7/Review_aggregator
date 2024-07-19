@@ -22,6 +22,7 @@
     <div class="card-container">
       {% for movie in results %}
       <div class="card">
+        <a href="{% url 'movie_details' movie.id %}">
         <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" alt="{{ movie.title }} Poster">
         <div class="card-content">
           <h3>{{ movie.title }} ({{ movie.release_date }})</h3>

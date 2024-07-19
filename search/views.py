@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from .tmdb import search_movies
+from django.shortcuts import render, get_object_or_404
+from .tmdb import search_movies, get_movie_details, get_movie_reviews
 
 def search_view(request):
     query = request.GET.get('q')
@@ -19,3 +19,8 @@ def search_view(request):
                     # If no poster path is available, provide a default image URL or handle it accordingly
                     movie['poster_url'] = "https://via.placeholder.com/500x750?text=No+Image"
     return render(request, 'search.html', {'results': results, 'message': message})
+
+def movie_details_view(request, movie_id):
+    movie = get_movie_details(movie_id)
+    reviews = get_movie_reviews(movie_id)
+    return render(request, 'movie_details.html', {'movie': movie, 'reviews': reviews})

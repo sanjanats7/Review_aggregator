@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ movie.title }} - Details</title>
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'home_styles.css' %}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>{{ movie.title }}</h1>
+      <img src="{{ movie.poster_url }}" alt="{{ movie.title }}" />
+      <p>{{ movie.overview }}</p>
+
+      <h2>Reviews</h2>
+      <ul>
+        {% for review in reviews %}
+        <li>
+          <p><strong>{{ review.author }}</strong></p>
+          <p>{{ review.content }}</p>
+          <a href="{{ review.url }}" target="_blank">Read more</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
