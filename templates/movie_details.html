@@ -63,26 +63,41 @@
       padding: 0;
     }
 
-    li {
+    .streaming-service {
       background-color: #f9f9f9;
       margin-bottom: 20px;
       padding: 20px;
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      transition: background-color 0.3s;
     }
 
-    li p {
-      margin: 5px 0;
+    .streaming-service:hover {
+      background-color: #ececec;
+    }
+
+    .streaming-service img {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .streaming-service p {
+      margin: 0;
     }
 
     a {
-      color: #007bff;
+      color: inherit;
       text-decoration: none;
     }
 
     a:hover {
-      text-decoration: underline;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -95,9 +110,15 @@
 
     <h2>Where to Stream</h2>
     <ul>
-      {% for link in streaming_links %}
+      {% for service in streaming_services %}
       <li>
-        <a href="{{ link.url }}" target="_blank">{{ link.platform }}</a>
+        <a href="{{ service.url }}" target="_blank" class="streaming-service">
+          <img src="{{ service.logo_url }}" alt="{{ service.name }}" />
+          <div>
+            <strong>{{ service.name }}</strong>
+            <p>{{ service.snippet }}</p>
+          </div>
+        </a>
       </li>
       {% endfor %}
     </ul>
